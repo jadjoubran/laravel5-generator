@@ -1,0 +1,6 @@
+language: node_js
+node_js:
+  - '0.10'
+before_install:
+  - currentfolder=${PWD##*/}
+  - if [ "$currentfolder" != 'generator-laravel5' ]; then cd .. && eval "mv $currentfolder generator-laravel5" && cd generator-laravel5; fi
