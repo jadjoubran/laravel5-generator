@@ -1,6 +1,15 @@
-# generator-laravel5 [![Build Status](https://secure.travis-ci.org/jadjoubran/generator-laravel5.png?branch=master)](https://travis-ci.org/jadjoubran/generator-laravel5)
+# generator-laravel5
 
 > [Yeoman](http://yeoman.io) generator
+
+
+## Before you start
+
+This repository hopes to be the starting point for future Laravel 5 applications. Since Laravel 5 was released a few days ago, this repository still needs a lot of work.
+I am hoping to get feature suggestions from people like you. Just create a new issue.
+This is what I am planning to add soon:
+* install and create new laravel app
+* configure ellixir for popular choices (less, sass, coffee script, image optimization, jshint, jscs)
 
 
 ## Getting Started
