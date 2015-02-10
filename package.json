@@ -1,10 +1,10 @@
 {
   "name": "generator-laravel5",
   "version": "0.0.1",
-  "description": "Yeoman generator",
+  "description": "Yeoman Laravel 5 generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "jadjoubran/generator-laravel5",
+  "repository": "jadjoubran/laravel5-generator",
   "author": {
     "name": "Jad Joubran",
     "email": "jad@jadjoubran.com",
