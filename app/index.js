@@ -96,7 +96,7 @@ configuring: {
 			};
 
 
-			this.spawnCommand('composer', ['create-project', 'laravel/laravel', 'laravel5_temp', '--prefer-dist'])
+			this.spawnCommand('composer', ['create-project', 'laravel/laravel', 'laravel', '--prefer-dist'])
 			.on('error', function(){
 				this.log(chalk.error('Error installing Laravel'));
 			}.bind(this))
