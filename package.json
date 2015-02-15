@@ -1,6 +1,6 @@
 {
   "name": "generator-laravel5",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yeoman Laravel 5 generator",
   "license": "MIT",
   "main": "app/index.js",
@@ -23,8 +23,10 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "yeoman-generator": "^0.18.0",
     "chalk": "^0.5.0",
+    "fs-extra": "^0.16.3",
+    "ncp": "^1.0.1",
+    "yeoman-generator": "^0.18.0",
     "yosay": "^0.3.0"
   },
   "devDependencies": {
