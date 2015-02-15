@@ -59,23 +59,23 @@ configuring: {
 	},
 
 	writing: {
-		app: function () {
-			this.fs.copy(
-				this.templatePath('_bower.json'),
-				this.destinationPath('bower.json')
-				);
-		},
+		// app: function () {
+		// 	this.fs.copy(
+		// 		this.templatePath('_bower.json'),
+		// 		this.destinationPath('bower.json')
+		// 		);
+		// },
 
-		projectfiles: function () {
-			this.fs.copy(
-				this.templatePath('editorconfig'),
-				this.destinationPath('.editorconfig')
-				);
-			this.fs.copy(
-				this.templatePath('jshintrc'),
-				this.destinationPath('.jshintrc')
-				);
-		}
+		// projectfiles: function () {
+		// 	this.fs.copy(
+		// 		this.templatePath('editorconfig'),
+		// 		this.destinationPath('.editorconfig')
+		// 		);
+		// 	this.fs.copy(
+		// 		this.templatePath('jshintrc'),
+		// 		this.destinationPath('.jshintrc')
+		// 		);
+		// }
 	},
 
 	install: function () {
@@ -110,9 +110,11 @@ configuring: {
 				// }.bind(this));
 			}.bind(this));
 
-			this.installDependencies({
-				skipInstall: this.options['skip-install']
-			});
+			// this.npmInstall();
+
+			// this.installDependencies({
+				// skipInstall: this.options['skip-install']
+			// });
 		}
 	}
 });
