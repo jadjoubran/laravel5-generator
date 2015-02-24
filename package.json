@@ -23,7 +23,7 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "chalk": "^0.5.0",
+    "chalk": "^1.0.0",
     "fs-extra": "^0.16.3",
     "ncp": "^1.0.1",
     "yeoman-generator": "^0.18.0",
