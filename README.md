@@ -26,6 +26,7 @@ This is what I am planning to add soon:
 * moving laravel into root folder
 * manage dependencies
 * configure ellixir for popular choices (less, sass, coffee script, image optimization, jshint, jscs)
+* support javascript frameworks (check this [issue](https://github.com/jadjoubran/laravel5-generator/issues/2))
 
 
 ## License
