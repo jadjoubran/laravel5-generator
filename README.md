@@ -24,7 +24,7 @@ This repository is a work in progress, but basic functionality is working.
 I am hoping to get feature suggestions from people like you. Just create a new issue.  
 This is what I am planning to add soon:
 * fix npm 3 warning for peer dependency
-* moving laravel into root folder
+* fix yeoman to deal with installation inside laravel folder (instead of root directory)
 * manage dependencies
 * configure elixir for popular choices (less, sass, coffee script, image optimization, jshint, jscs)
 * support javascript frameworks (check this [issue](https://github.com/jadjoubran/laravel5-generator/issues/2))

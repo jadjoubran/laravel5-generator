@@ -33,7 +33,7 @@ module.exports = yeoman.generators.Base.extend({
 			if ( !this.wantsBower ){
 				return false;
 			}
-			this.log(chalk.cyan('Testing for bower'));
+			this.log(chalk.cyan('Checking if bower is installed globally'));
 
 			this.spawnCommand('bower', ['-v'])
 			.on('error', function(){
