@@ -19,7 +19,7 @@ module.exports = yeoman.generators.Base.extend({
 		composer: function(){
 			this.log(chalk.cyan('Testing for composer'));
 
-			this.spawnCommand('composer2', ['--version'])
+			this.spawnCommand('composer', ['--version'])
 			.on('error', function(){
 				this.log(chalk.red('Composer not found. Make sure it is available in your path and download it from https://getcomposer.org'));
 				return false;
