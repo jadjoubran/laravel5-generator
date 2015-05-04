@@ -13,24 +13,13 @@ module.exports = yeoman.generators.Base.extend({
 
 		this.log(chalk.red('Laravel5') + ' generator will install laravel5 in your folder!');
 		done();
-
-		// var prompts = [{
-			// type: 'confirm',
-			// name: 'useBower',
-			// message: 'Would you like to use Bower to load your vendor packages?'
-		// }];
-
-		// this.prompt(prompts, function (props) {
-			// this.useBower = props.useBower;
-			// done();
-		// }.bind(this));
 	},
 
 	configuring: {
 		composer: function(){
 			this.log(chalk.cyan('Testing for composer'));
 
-			this.spawnCommand('composer', ['--version'])
+			this.spawnCommand('composer2', ['--version'])
 			.on('error', function(){
 				this.log(chalk.red('Composer not found. Make sure it is available in your path and download it from https://getcomposer.org'));
 				return false;
