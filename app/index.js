@@ -1,7 +1,7 @@
 'use strict';
-var yeoman = require('yeoman-generator'),
-chalk  = require('chalk'),
-replace = require('replace');
+var yeoman = require('yeoman-generator');
+var chalk = require('chalk');
+var yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
 	initializing: function () {
@@ -11,89 +11,76 @@ module.exports = yeoman.generators.Base.extend({
 	prompting: function () {
 		var done = this.async();
 
-		this.log(chalk.red('Laravel5') + ' generator will install laravel5 in your folder!');
+		this.log(yosay(
+			'Welcome to the first-class ' + chalk.red('Laravel5') + ' generator!'
+			));
+
+
 		done();
 	},
 
 	configuring: {
 		composer: function(){
-			this.log(chalk.cyan('Testing for composer'));
+			var done = this.async();
+			this.log(chalk.cyan('Checking if composer is installed'));
 
 			this.spawnCommand('composer', ['--version'])
 			.on('error', function(){
-				this.log(chalk.red('Composer not found. Make sure it is available in your path and download it from https://getcomposer.org'));
+				this.log(chalk.red('Composer not found. Make sure it is available in your path and download it from getcomposer.org'));
 				return false;
 			}.bind(this))
 			.on('exit', function(){
 				this.log(chalk.green('Composer found'));
 			}.bind(this));
-
+			done();
 		},
 		bower: function(){
-			if ( !this.wantsBower ){
-				return false;
-			}
+			var done = this.async();
 			this.log(chalk.cyan('Checking if bower is installed globally'));
 
 			this.spawnCommand('bower', ['-v'])
 			.on('error', function(){
-				this.log(chalk.red('Bower not found. Installing bower'));
+				this.log(chalk.red('Bower not found. Installing bower globally'));
 				this.spawnCommand('npm', ['install', '-g', 'bower'])
+				.on('error', function(){
+					this.log(chalk.red('Error installing Bower'));
+				}.bind(this))
 				.on('exit', function(){
 					this.log(chalk.green('Bower installed!'));
-				}.bind(this));
+				}.bind(this))
 			}.bind(this))
 			.on('exit', function(){
 				this.log(chalk.green('Bower found'));
 			}.bind(this));
-		},
+			done();
+		}
+	},
 
-		writing: {
-			app: function () {
-				this.fs.copy(
-					this.templatePath('_bower.json'),
-					this.destinationPath('laravel/bower.json')
-					);
-			},
-
-			projectfiles: function () {
-				this.fs.copy(
-					this.templatePath('editorconfig'),
-					this.destinationPath('laravel/.editorconfig')
-					);
-				this.fs.copy(
-					this.templatePath('jshintrc'),
-					this.destinationPath('laravel/.jshintrc')
-					);
-			}
-		},
-
-		install: function () {
+	writing: {
+		laravel5: function(){
+			var done = this.async();
 			this.spawnCommand('composer', ['create-project', 'laravel/laravel', 'laravel', '--prefer-dist'])
 			.on('error', function(){
 				this.log(chalk.error('Error installing Laravel'));
+				return false;
 			}.bind(this))
 			.on('exit', function(){
-				replace({
-					regex: 'mix\.',
-					replacement: 'mix.bower().',
-					paths: ['laravel/gulpfile.js'],
-					recursive: false,
-					silent: false
-				});
-				replace({
-					regex: '"laravel-elixir": "\*"',
-					replacement: '"laravel-elixir": "*", "laravel-elixir-bower": "*"',
-					paths: ['laravel/package.json'],
-					recursive: false,
-					silent: false
-				});
+				this.log(chalk.green('Laravel5 installed'));
+				done();
 			}.bind(this));
-			return true;
-			// this.npmInstall();
-			// this.installDependencies({
-				// skipInstall: this.options['skip-install']
-			// });
+		},
+		app: function () {
+
+		}
+	},
+
+	install: function () {
+		var done = this.async();
+		this.destinationRoot('laravel');
+		this.installDependencies();
+		done();
+		// this.log('Thank you for using generator-laravel5. Kindly ' +
+			// chalk.red('star') + ' the repository on github and/or submit feature requests!');
 }
-}
+
 });
