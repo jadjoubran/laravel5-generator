@@ -26,7 +26,7 @@ module.exports = yeoman.generators.Base.extend({
 
 			this.spawnCommand('composer', ['--version'])
 			.on('error', function(){
-				this.log(chalk.red('Composer not found. Make sure it is available in your path and download it from getcomposer.org'));
+				this.log(chalk.red('Composer not found. Make sure it is available in your path or download it from getcomposer.org'));
 				return false;
 			}.bind(this))
 			.on('exit', function(){
@@ -47,7 +47,7 @@ module.exports = yeoman.generators.Base.extend({
 				}.bind(this))
 				.on('exit', function(){
 					this.log(chalk.green('Bower installed!'));
-				}.bind(this))
+				}.bind(this));
 			}.bind(this))
 			.on('exit', function(){
 				this.log(chalk.green('Bower found'));
@@ -69,14 +69,33 @@ module.exports = yeoman.generators.Base.extend({
 				done();
 			}.bind(this));
 		},
-		app: function () {
-
+		projectfiles: function () {
+			this.destinationRoot('laravel');
+			this.fs.copy(
+				this.templatePath('_package.json'),
+				this.destinationPath('package.json')
+				);
+			this.fs.copy(
+				this.templatePath('_bower.json'),
+				this.destinationPath('bower.json')
+				);
+			this.fs.copy(
+				this.templatePath('_editorconfig'),
+				this.destinationPath('.editorconfig')
+				);
+			this.fs.copy(
+				this.templatePath('_jscs.json'),
+				this.destinationPath('.jscs.json')
+				);
+			this.fs.copy(
+				this.templatePath('_jshintrc'),
+				this.destinationPath('.jshintrc')
+				);
 		}
 	},
 
 	install: function () {
 		var done = this.async();
-		this.destinationRoot('laravel');
 		this.installDependencies();
 		done();
 		// this.log('Thank you for using generator-laravel5. Kindly ' +
