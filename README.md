@@ -23,8 +23,6 @@ This repository hopes to be the starting point for future Laravel 5 applications
 This repository is a work in progress, but basic functionality is working.  
 I am hoping to get feature suggestions from people like you. Just create a new issue.  
 This is what I am planning to add soon:
-* copy bower, copy package.json, editorconfig and jshint
-* ask for optional conf files
 * fix elixir to use laravel-elixir-bower
 * request to star the repository and submit feature requests at the end
 * configure elixir for popular choices (less, sass, coffee script, image optimization, jshint, jscs)
@@ -34,6 +32,9 @@ This is what I am planning to add soon:
 ## Changelog
 
 ### 0.0.7
+
++ copy bower, copy package.json, editorconfig, jshint and jscs
++ ask user for editorconfig, jshint and jscs
 
 
 

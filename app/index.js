@@ -16,7 +16,29 @@ module.exports = yeoman.generators.Base.extend({
 			));
 
 
-		done();
+		var prompts = [{
+			type: 'confirm',
+			name: 'editorconfig',
+			message: 'Would you like to use Editor Config?',
+			default: true
+		},
+		{
+			type: 'confirm',
+			name: 'jshint',
+			message: 'Would you like to use jshint?',
+			default: true
+		},
+		{
+			type: 'confirm',
+			name: 'jscs',
+			message: 'Would you like to use javascript code style (jscs)?',
+			default: true
+		},
+		];
+		this.prompt(prompts, function (props) {
+			this.props = props;
+			done();
+		}.bind(this));
 	},
 
 	configuring: {
@@ -79,18 +101,24 @@ module.exports = yeoman.generators.Base.extend({
 				this.templatePath('_bower.json'),
 				this.destinationPath('bower.json')
 				);
-			this.fs.copy(
-				this.templatePath('_editorconfig'),
-				this.destinationPath('.editorconfig')
-				);
-			this.fs.copy(
-				this.templatePath('_jscs.json'),
-				this.destinationPath('.jscs.json')
-				);
-			this.fs.copy(
-				this.templatePath('_jshintrc'),
-				this.destinationPath('.jshintrc')
-				);
+			if ( this.props.editorconfig ){
+				this.fs.copy(
+					this.templatePath('_editorconfig'),
+					this.destinationPath('.editorconfig')
+					);
+			}
+			if ( this.props.jshint ){
+				this.fs.copy(
+					this.templatePath('_jshintrc'),
+					this.destinationPath('.jshintrc')
+					);
+			}
+			if ( this.props.jscs ){
+				this.fs.copy(
+					this.templatePath('_jscs.json'),
+					this.destinationPath('.jscs.json')
+					);
+			}
 		}
 	},
 
