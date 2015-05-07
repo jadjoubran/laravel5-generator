@@ -33,6 +33,10 @@ This is what I am planning to add soon:
 
 ## Changelog
 
+### v3.0.6
+
++ fixed repository link
+
 ### v3.0.5
 
 + updated to new base generator-generator
