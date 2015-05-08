@@ -101,6 +101,10 @@ module.exports = yeoman.generators.Base.extend({
 				this.templatePath('_bower.json'),
 				this.destinationPath('bower.json')
 				);
+			this.fs.copy(
+				this.templatePath('_gulpfile.js'),
+				this.destinationPath('gulpfile.js')
+				);
 			if ( this.props.editorconfig ){
 				this.fs.copy(
 					this.templatePath('_editorconfig'),
@@ -126,8 +130,10 @@ module.exports = yeoman.generators.Base.extend({
 		var done = this.async();
 		this.installDependencies();
 		done();
-		// this.log('Thank you for using generator-laravel5. Kindly ' +
-			// chalk.red('star') + ' the repository on github and/or submit feature requests!');
-}
+	},
+	end: function(){
+		this.log("\nAll is done!\nThank you for using generator-laravel5. Kindly " + chalk.red('star') +
+			' the repository on github and/or submit feature requests!');
+	}
 
 });
