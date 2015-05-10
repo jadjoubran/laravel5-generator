@@ -1,5 +1,7 @@
 var elixir = require('laravel-elixir');
+
 require('laravel-elixir-bower');
+require('laravel-elixir-angular');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,8 +14,16 @@ require('laravel-elixir-bower');
  |
  */
 
-elixir(function(mix) {
-    mix
-    .bower()
-    .less('app.less');
-});
+ elixir.config.sourcemaps = false;
+ elixir.config.registerWatcher("default", "angular/**");
+
+ elixir(function(mix) {
+ 	mix
+ 	.bower()
+ 	.angular('angular/')
+ 	.less('../../../angular/**/*.less', 'resources/.tmp/')
+ 	.copy('angular/app/**/*.html', 'public/views/app/')
+ 	.copy('angular/directives/**/*.html', 'public/views/directives/')
+ 	.stylesIn('resources/.tmp', 'public/css/');
+
+ });

@@ -10,8 +10,16 @@
   "latedef": true,
   "newcap": true,
   "noarg": true,
-  "quotmark": "single",
   "undef": true,
-  "unused": true,
-  "strict": true
+  "strict": true,
+    "globals": {
+    "angular": false,
+    "describe": false,
+    "it": false,
+    "expect": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "module": false,
+    "inject": false
+  }
 }

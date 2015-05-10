@@ -8,7 +8,7 @@
 ### Setup
 
 ```bash
-npm install -g yo generator-laravel5
+npm install -g yo generator-laravel5 bower
 ```
 
 When ready, initiate the generator:
@@ -17,15 +17,23 @@ When ready, initiate the generator:
 yo laravel5
 ```
 
-## Notes
+Answer a few questions and you're ready to start working on your Favorite laravel 5 application.
+You can also setup your laravel application to use Angular JS.
 
-This repository hopes to be the starting point for future Laravel 5 applications.  
-I am hoping to get feature suggestions from people like you. Just create a new issue.  
-This is what I am planning to add soon:
-* support javascript frameworks (check this [issue](https://github.com/jadjoubran/laravel5-generator/issues/2))
+
+## Contributing
+
+I am hoping to get feature suggestions from people like you. Just create a new issue.
 
 
 ## Changelog
+
+### 0.1.0
+
++ Added suppot for Javascript Framework: Angular
++ Defaulting `private` to `true` in both bower.json and package.json
++ Eliminated manual conflict resolution because the laravel installation is fresh and is not altered by the user yet
++ Speed up generation process by installing bower globally when downloading the generator instead of during runtime
 
 ### 0.0.8
 

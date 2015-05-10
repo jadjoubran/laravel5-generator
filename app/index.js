@@ -6,6 +6,9 @@ var yosay = require('yosay');
 module.exports = yeoman.generators.Base.extend({
 	initializing: function () {
 		this.pkg = require('../package.json');
+
+		//eliminated manual conflict resolution because the laravel installation is fresh and is not altered by the user yet
+		this.conflicter.force = true;
 	},
 
 	prompting: function () {
@@ -18,22 +21,25 @@ module.exports = yeoman.generators.Base.extend({
 
 		var prompts = [{
 			type: 'confirm',
-			name: 'editorconfig',
-			message: 'Would you like to use Editor Config?',
-			default: true
-		},
-		{
+			name: 'angularjs',
+			message: 'Would you like to use Angular as a javascript framework?',
+			default: false
+		}, {
 			type: 'confirm',
 			name: 'jshint',
 			message: 'Would you like to use jshint?',
 			default: true
-		},
-		{
+		}, {
 			type: 'confirm',
 			name: 'jscs',
 			message: 'Would you like to use javascript code style (jscs)?',
 			default: true
-		},
+		}, {
+			type: 'confirm',
+			name: 'editorconfig',
+			message: 'Would you like to use Editor Config?',
+			default: true
+		}
 		];
 		this.prompt(prompts, function (props) {
 			this.props = props;
@@ -62,14 +68,8 @@ module.exports = yeoman.generators.Base.extend({
 
 			this.spawnCommand('bower', ['-v'])
 			.on('error', function(){
-				this.log(chalk.red('Bower not found. Installing bower globally'));
-				this.spawnCommand('npm', ['install', '-g', 'bower'])
-				.on('error', function(){
-					this.log(chalk.red('Error installing Bower'));
-				}.bind(this))
-				.on('exit', function(){
-					this.log(chalk.green('Bower installed!'));
-				}.bind(this));
+				this.log(chalk.red('Bower not found. Please download it globally using npm install -g bower'));
+				return false;
 			}.bind(this))
 			.on('exit', function(){
 				this.log(chalk.green('Bower found'));
@@ -93,46 +93,87 @@ module.exports = yeoman.generators.Base.extend({
 		},
 		projectfiles: function () {
 			this.destinationRoot('laravel');
+
+			/*generic installs*/
 			this.fs.copy(
-				this.templatePath('_package.json'),
-				this.destinationPath('package.json')
+				this.templatePath('generic/_readme.md'),
+				this.destinationPath('readme.md')
 				);
-			this.fs.copy(
-				this.templatePath('_bower.json'),
-				this.destinationPath('bower.json')
-				);
-			this.fs.copy(
-				this.templatePath('_gulpfile.js'),
-				this.destinationPath('gulpfile.js')
-				);
+			if ( this.props.jscs ){
+				this.fs.copy(
+					this.templatePath('generic/_jscs.json'),
+					this.destinationPath('.jscs.json')
+					);
+			}
 			if ( this.props.editorconfig ){
 				this.fs.copy(
-					this.templatePath('_editorconfig'),
+					this.templatePath('generic/_editorconfig'),
 					this.destinationPath('.editorconfig')
 					);
 			}
-			if ( this.props.jshint ){
+
+			/*angularjs specific*/
+			if ( this.props.angularjs ){
 				this.fs.copy(
-					this.templatePath('_jshintrc'),
-					this.destinationPath('.jshintrc')
+					this.templatePath('angular/_package.json'),
+					this.destinationPath('package.json')
 					);
-			}
-			if ( this.props.jscs ){
 				this.fs.copy(
-					this.templatePath('_jscs.json'),
-					this.destinationPath('.jscs.json')
+					this.templatePath('angular/_bower.json'),
+					this.destinationPath('bower.json')
 					);
+				this.fs.copy(
+					this.templatePath('angular/_gulpfile.js'),
+					this.destinationPath('gulpfile.js')
+					);
+				this.fs.copy(
+					this.templatePath('angular/_gitignore'),
+					this.destinationPath('.gitignore')
+					);
+				if ( this.props.jshint ){
+					this.fs.copy(
+						this.templatePath('angular/_jshintrc'),
+						this.destinationPath('.jshintrc')
+						);
+				}
+				/*copy angular sample directory*/
+				this.fs.copy(
+					this.templatePath('angular/angular/**/*'),
+					this.destinationRoot('angular/')
+					);
+			}else{
+				this.fs.copy(
+					this.templatePath('plain/_package.json'),
+					this.destinationPath('package.json')
+					);
+				this.fs.copy(
+					this.templatePath('plain/_bower.json'),
+					this.destinationPath('bower.json')
+					);
+				this.fs.copy(
+					this.templatePath('plain/_gulpfile.js'),
+					this.destinationPath('gulpfile.js')
+					);
+				if ( this.props.jshint ){
+					this.fs.copy(
+						this.templatePath('plain/_jshintrc'),
+						this.destinationPath('.jshintrc')
+						);
+				}
 			}
 		}
 	},
 
 	install: function () {
 		var done = this.async();
+		this.destinationRoot('../');
 		this.installDependencies();
 		done();
 	},
 	end: function(){
-		this.log("\nAll is done!\nThank you for using generator-laravel5. Kindly " + chalk.red('star') +
+		this.log('You need to manually uncomment .bower() in your gulpfile.js after adding the first bower component' + "\n");
+
+		this.log("\nAll done!\nThank you for using generator-laravel5. Kindly " + chalk.yellow('star') +
 			' the repository on github and/or submit feature requests!');
 	}
 

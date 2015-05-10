@@ -14,6 +14,10 @@ require('laravel-elixir-bower');
 
 elixir(function(mix) {
     mix
-    .bower()
+    /*
+    uncomment `.bower()` when you add your first bower component,
+    or else gulp bower will blow up complaining that you don't have any bower components
+    */
+    // .bower()
     .less('app.less');
 });
