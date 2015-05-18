@@ -28,6 +28,10 @@ I am hoping to get feature suggestions from people like you. Just create a new i
 
 ## Changelog
 
+### 0.1.1
+
++ Updated description on yeoman website
+
 ### 0.1.0
 
 + Added suppot for Javascript Framework: Angular
